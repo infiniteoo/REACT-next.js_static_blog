@@ -15,8 +15,7 @@ export default function Home({ posts }) {
 
       <div className="posts">
         {posts.map((post, index) => (
-          // eslint-disable-next-line react/jsx-key
-          <Post post={post} />
+          <Post key={index} post={post} />
         ))}
       </div>
     </div>
