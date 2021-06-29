@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -6,9 +7,20 @@ import Link from 'next/link'
 
 export default function PostPage({frontmatter: {title, date,cover_image}, slug, content}) {
     return (
-        <div>
-            {title}
-        </div>
+        <>
+            <Link href='/'>
+                <a className="btn btn-back">Go Back</a>
+            </Link>
+
+            <div className="card card-page">
+                <h1 className="post-title">{title}</h1>
+                <div className="post-date">Posted on {date}</div>
+                <img src={cover_image} alt="" />
+                <div className="post-body">
+                    <div dangerouslySetInnerHTML={{__html: marked(content)}}></div>
+                </div>
+            </div>
+        </>
     )
 }
 
