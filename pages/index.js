@@ -1,9 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+import matter from 'gray-matter'
 import Head from 'next/head'
 
 export default function Home({ posts }) {
- 
+ console.log(posts)
   return (
     <div>
       <Head>
@@ -24,17 +25,20 @@ export async function getStaticProps() {
     // Create slug
     const slug = filename.replace('.md', '')
 
+    // get frontmatter
+    const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8')
+    const {data:frontmatter} = matter(markdownWithMeta)
+
     return {
-      slug
+      slug,
+      frontmatter
     }
   })
 
-  console.log(posts)
-
-
+  
   return {
     props: {
-      posts: 'The Posts'
+      posts
     }
   }
 }
