@@ -34,7 +34,7 @@ export async function getStaticPaths() {
         }
     }))
 
-    console.log(paths)
+    
 
     return {
         paths,
@@ -49,7 +49,7 @@ export async function getStaticProps({params: {slug}}) {
 
     const {data:frontmatter, content} = matter(markdownWithMeta)
 
-    console.log(slug)
+    
     return {
         props: {
             frontmatter,
