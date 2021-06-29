@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import Head from 'next/head'
+import Post from '../components/Post'
 
 export default function Home({ posts }) {
  console.log(posts)
@@ -11,7 +12,12 @@ export default function Home({ posts }) {
         <title>Dev Blog</title>
       </Head>
 
-      <h2>Hello</h2>
+      <div className="posts">
+        {posts.map((post, index) => (
+          // eslint-disable-next-line react/jsx-key
+          <Post post={post} />
+        ))}
+      </div>
     </div>
   )
 }
