@@ -1,14 +1,40 @@
+import fs from 'fs'
+import path from 'path'
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home({ posts }) {
+ 
   return (
     <div>
       <Head>
         <title>Dev Blog</title>
-       
       </Head>
 
       <h2>Hello</h2>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  // get files from the posts directory
+  const files = fs.readdirSync(path.join('posts'))
+  
+  // get slug and frontmatter from posts
+  const posts = files.map(filename => {
+    // Create slug
+    const slug = filename.replace('.md', '')
+
+    return {
+      slug
+    }
+  })
+
+  console.log(posts)
+
+
+  return {
+    props: {
+      posts: 'The Posts'
+    }
+  }
 }
